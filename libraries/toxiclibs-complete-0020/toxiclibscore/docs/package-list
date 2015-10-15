@@ -1,0 +1,11 @@
+toxi.geom
+toxi.geom.mesh
+toxi.geom.mesh.subdiv
+toxi.geom.mesh2d
+toxi.math
+toxi.math.conversion
+toxi.math.noise
+toxi.math.waves
+toxi.util
+toxi.util.datatypes
+toxi.util.events

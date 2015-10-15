@@ -1,0 +1,698 @@
+2011-01-03  Karsten Schmidt  <k@postspectacular.com>
+
+	* examples/core/misc/CustomEvents/CustomEvents.pde,
+	src.audio/toxi/audio/AudioBuffer.java,
+	src.audio/toxi/audio/AudioSource.java,
+	src.audio/toxi/audio/DecompressInputStream.java,
+	src.audio/toxi/audio/FIRFilter.java,
+	src.audio/toxi/audio/IIRFilter.java,
+	src.audio/toxi/audio/JOALUtil.java,
+	src.audio/toxi/audio/MultiTimbralManager.java,
+	src.audio/toxi/audio/SoundListener.java,
+	src.audio/toxi/audio/SynthUtil.java,
+	src.audio/toxi/music/DelayedSamplePlayer.java,
+	src.audio/toxi/music/QuantizedTimeHandler.java,
+	src.audio/toxi/music/QuantizedTimeProvider.java,
+	src.audio/toxi/music/scale/AbstractScale.java,
+	src.audio/toxi/music/scale/GenericScale.java,
+	src.audio/toxi/music/scale/MajorScale.java,
+	src.color/toxi/color/AccessCriteria.java,
+	src.color/toxi/color/AlphaAccessor.java,
+	src.color/toxi/color/CMYKAccessor.java,
+	src.color/toxi/color/CMYKDistanceProxy.java,
+	src.color/toxi/color/ColorGradient.java,
+	src.color/toxi/color/ColorList.java,
+	src.color/toxi/color/ColorRange.java,
+	src.color/toxi/color/ColorTheme.java,
+	src.color/toxi/color/DistanceProxy.java,
+	src.color/toxi/color/HSVAccessor.java,
+	src.color/toxi/color/HSVDistanceProxy.java,
+	src.color/toxi/color/HistEntry.java,
+	src.color/toxi/color/Histogram.java, src.color/toxi/color/Hue.java,
+	src.color/toxi/color/LuminanceAccessor.java,
+	src.color/toxi/color/NamedColor.java,
+	src.color/toxi/color/ProximityComparator.java,
+	src.color/toxi/color/RGBAccessor.java,
+	src.color/toxi/color/RGBDistanceProxy.java,
+	src.color/toxi/color/ReadonlyTColor.java,
+	src.color/toxi/color/TColor.java,
+	src.color/toxi/color/TColorAdapter.java,
+	src.color/toxi/color/ToneMap.java,
+	src.color/toxi/color/theory/AnalogousStrategy.java,
+	src.color/toxi/color/theory/ColorTheoryRegistry.java,
+	src.color/toxi/color/theory/ColorTheoryStrategy.java,
+	src.color/toxi/color/theory/ComplementaryStrategy.java,
+	src.color/toxi/color/theory/CompoundTheoryStrategy.java,
+	src.color/toxi/color/theory/LeftSplitComplementaryStrategy.java,
+	src.color/toxi/color/theory/MonochromeTheoryStrategy.java,
+	src.color/toxi/color/theory/RightSplitComplementaryStrategy.java,
+	src.color/toxi/color/theory/SingleComplementStrategy.java,
+	src.color/toxi/color/theory/SplitComplementaryStrategy.java,
+	src.color/toxi/color/theory/TetradTheoryStrategy.java,
+	src.color/toxi/color/theory/TriadTheoryStrategy.java,
+	src.core/toxi/geom/AABB.java,
+	src.core/toxi/geom/AxisAlignedCylinder.java,
+	src.core/toxi/geom/BernsteinPolynomial.java,
+	src.core/toxi/geom/Circle.java,
+	src.core/toxi/geom/CircleIntersector.java,
+	src.core/toxi/geom/Cone.java, src.core/toxi/geom/Ellipse.java,
+	src.core/toxi/geom/Intersector2D.java,
+	src.core/toxi/geom/Intersector3D.java,
+	src.core/toxi/geom/IsectData2D.java,
+	src.core/toxi/geom/IsectData3D.java, src.core/toxi/geom/Line2D.java,
+	src.core/toxi/geom/Line3D.java, src.core/toxi/geom/Matrix4x4.java,
+	src.core/toxi/geom/Plane.java, src.core/toxi/geom/PointCloud.java,
+	src.core/toxi/geom/PointOctree.java,
+	src.core/toxi/geom/PointQuadtree.java,
+	src.core/toxi/geom/Polygon2D.java,
+	src.core/toxi/geom/PolygonClipper2D.java,
+	src.core/toxi/geom/Quaternion.java, src.core/toxi/geom/Ray2D.java,
+	src.core/toxi/geom/Ray3D.java,
+	src.core/toxi/geom/Ray3DIntersector.java,
+	src.core/toxi/geom/ReadonlyVec2D.java,
+	src.core/toxi/geom/ReadonlyVec3D.java, src.core/toxi/geom/Rect.java,
+	src.core/toxi/geom/Reflector3D.java,
+	src.core/toxi/geom/Shape2D.java, src.core/toxi/geom/Shape3D.java,
+	src.core/toxi/geom/Sphere.java,
+	src.core/toxi/geom/SphereIntersectorReflector.java,
+	src.core/toxi/geom/Spline2D.java, src.core/toxi/geom/Spline3D.java,
+	src.core/toxi/geom/SutherlandHodgemanClipper.java,
+	src.core/toxi/geom/Triangle.java,
+	src.core/toxi/geom/Triangle2D.java,
+	src.core/toxi/geom/Triangle3D.java,
+	src.core/toxi/geom/TriangleIntersector.java,
+	src.core/toxi/geom/Vec2D.java, src.core/toxi/geom/Vec3D.java,
+	src.core/toxi/geom/XAxisCylinder.java,
+	src.core/toxi/geom/YAxisCylinder.java,
+	src.core/toxi/geom/ZAxisCylinder.java,
+	src.core/toxi/geom/mesh/BezierPatch.java,
+	src.core/toxi/geom/mesh/BoxSelector.java,
+	src.core/toxi/geom/mesh/DefaultSTLColorModel.java,
+	src.core/toxi/geom/mesh/DefaultSelector.java,
+	src.core/toxi/geom/mesh/Face.java,
+	src.core/toxi/geom/mesh/LaplacianSmooth.java,
+	src.core/toxi/geom/mesh/MaterialiseSTLColorModel.java,
+	src.core/toxi/geom/mesh/Mesh3D.java,
+	src.core/toxi/geom/mesh/OBJWriter.java,
+	src.core/toxi/geom/mesh/PlaneSelector.java,
+	src.core/toxi/geom/mesh/STLColorModel.java,
+	src.core/toxi/geom/mesh/STLReader.java,
+	src.core/toxi/geom/mesh/STLWriter.java,
+	src.core/toxi/geom/mesh/SphereFunction.java,
+	src.core/toxi/geom/mesh/SphericalHarmonics.java,
+	src.core/toxi/geom/mesh/SuperEllipsoid.java,
+	src.core/toxi/geom/mesh/SurfaceFunction.java,
+	src.core/toxi/geom/mesh/SurfaceMeshBuilder.java,
+	src.core/toxi/geom/mesh/Terrain.java,
+	src.core/toxi/geom/mesh/TriangleMesh.java,
+	src.core/toxi/geom/mesh/Vertex.java,
+	src.core/toxi/geom/mesh/VertexSelector.java,
+	src.core/toxi/geom/mesh/WEFace.java,
+	src.core/toxi/geom/mesh/WEMeshFilterStrategy.java,
+	src.core/toxi/geom/mesh/WETriangleMesh.java,
+	src.core/toxi/geom/mesh/WEVertex.java,
+	src.core/toxi/geom/mesh/WingedEdge.java,
+	src.core/toxi/geom/mesh/subdiv/DisplacementSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/DualDisplacementSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/DualSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/EdgeLengthComparator.java,
+	src.core/toxi/geom/mesh/subdiv/FaceCountComparator.java,
+	src.core/toxi/geom/mesh/subdiv/MidpointDisplacementSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/MidpointSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/NormalDisplacementSubdivision.java,
+	src.core/toxi/geom/mesh/subdiv/SubdivisionStrategy.java,
+	src.core/toxi/geom/mesh/subdiv/TriSubdivision.java,
+	src.core/toxi/geom/mesh2d/DelaunayVertex.java,
+	src.core/toxi/geom/mesh2d/Voronoi.java,
+	src.core/toxi/math/BezierInterpolation.java,
+	src.core/toxi/math/CircularInterpolation.java,
+	src.core/toxi/math/CosineInterpolation.java,
+	src.core/toxi/math/DecimatedInterpolation.java,
+	src.core/toxi/math/ExponentialInterpolation.java,
+	src.core/toxi/math/InterpolateStrategy.java,
+	src.core/toxi/math/Interpolation2D.java,
+	src.core/toxi/math/LinearInterpolation.java,
+	src.core/toxi/math/MathUtils.java, src.core/toxi/math/ScaleMap.java,
+	src.core/toxi/math/SigmoidInterpolation.java,
+	src.core/toxi/math/SinCosLUT.java,
+	src.core/toxi/math/ThresholdInterpolation.java,
+	src.core/toxi/math/ZoomLensInterpolation.java,
+	src.core/toxi/math/conversion/UnitTranslator.java,
+	src.core/toxi/math/noise/PerlinNoise.java,
+	src.core/toxi/math/noise/SimplexNoise.java,
+	src.core/toxi/math/waves/AMFMSineWave.java,
+	src.core/toxi/math/waves/AbstractWave.java,
+	src.core/toxi/math/waves/ConstantWave.java,
+	src.core/toxi/math/waves/FMHarmonicSquareWave.java,
+	src.core/toxi/math/waves/FMSawtoothWave.java,
+	src.core/toxi/math/waves/FMSineWave.java,
+	src.core/toxi/math/waves/FMSquareWave.java,
+	src.core/toxi/math/waves/FMTriangleWave.java,
+	src.core/toxi/math/waves/SineWave.java,
+	src.core/toxi/math/waves/WaveState.java,
+	src.core/toxi/util/DateUtils.java,
+	src.core/toxi/util/FileSequenceDescriptor.java,
+	src.core/toxi/util/FileUtils.java,
+	src.core/toxi/util/datatypes/ArrayUtil.java,
+	src.core/toxi/util/datatypes/BiasedFloatRange.java,
+	src.core/toxi/util/datatypes/BiasedIntegerRange.java,
+	src.core/toxi/util/datatypes/DoubleRange.java,
+	src.core/toxi/util/datatypes/FloatRange.java,
+	src.core/toxi/util/datatypes/GenericSet.java,
+	src.core/toxi/util/datatypes/IntegerRange.java,
+	src.core/toxi/util/datatypes/IntegerSet.java,
+	src.core/toxi/util/datatypes/SingletonRegistry.java,
+	src.core/toxi/util/datatypes/TypedProperties.java,
+	src.core/toxi/util/datatypes/WeightedRandomEntry.java,
+	src.core/toxi/util/datatypes/WeightedRandomSet.java,
+	src.core/toxi/util/events/EventDispatcher.java,
+	src.data/toxi/data/csv/CSVAdapter.java,
+	src.data/toxi/data/csv/CSVFieldMapper.java,
+	src.data/toxi/data/csv/CSVListener.java,
+	src.data/toxi/data/csv/CSVParser.java,
+	src.data/toxi/data/feeds/AtomAuthor.java,
+	src.data/toxi/data/feeds/AtomContent.java,
+	src.data/toxi/data/feeds/AtomEntry.java,
+	src.data/toxi/data/feeds/AtomFeed.java,
+	src.data/toxi/data/feeds/AtomLink.java,
+	src.data/toxi/data/feeds/RSSChannel.java,
+	src.data/toxi/data/feeds/RSSEnclosure.java,
+	src.data/toxi/data/feeds/RSSFeed.java,
+	src.data/toxi/data/feeds/RSSItem.java,
+	src.data/toxi/data/feeds/util/Iso8601DateAdapter.java,
+	src.data/toxi/data/feeds/util/Rfc822DateAdapter.java,
+	src.image/toxi/image/util/Filter8bit.java,
+	src.image/toxi/image/util/TiledFrameExporter.java,
+	src.p5/toxi/processing/ToxiclibsSupport.java,
+	src.physics/toxi/physics/ParticlePath.java,
+	src.physics/toxi/physics/ParticleString.java,
+	src.physics/toxi/physics/PullBackString.java,
+	src.physics/toxi/physics/VerletConstrainedSpring.java,
+	src.physics/toxi/physics/VerletMinDistanceSpring.java,
+	src.physics/toxi/physics/VerletParticle.java,
+	src.physics/toxi/physics/VerletPhysics.java,
+	src.physics/toxi/physics/VerletSpring.java,
+	src.physics/toxi/physics/behaviors/AttractionBehavior.java,
+	src.physics/toxi/physics/behaviors/ConstantForceBehavior.java,
+	src.physics/toxi/physics/behaviors/GravityBehavior.java,
+	src.physics/toxi/physics/behaviors/ParticleBehavior.java,
+	src.physics/toxi/physics/constraints/AxisConstraint.java,
+	src.physics/toxi/physics/constraints/BoxConstraint.java,
+	src.physics/toxi/physics/constraints/CylinderConstraint.java,
+	src.physics/toxi/physics/constraints/MaxConstraint.java,
+	src.physics/toxi/physics/constraints/MinConstraint.java,
+	src.physics/toxi/physics/constraints/ParticleConstraint.java,
+	src.physics/toxi/physics/constraints/PlaneConstraint.java,
+	src.physics/toxi/physics/constraints/SoftBoxConstraint.java,
+	src.physics/toxi/physics/constraints/SphereConstraint.java,
+	src.physics/toxi/physics2d/ParticlePath2D.java,
+	src.physics/toxi/physics2d/ParticleString2D.java,
+	src.physics/toxi/physics2d/PullBackString2D.java,
+	src.physics/toxi/physics2d/VerletConstrainedSpring2D.java,
+	src.physics/toxi/physics2d/VerletMinDistanceSpring2D.java,
+	src.physics/toxi/physics2d/VerletParticle2D.java,
+	src.physics/toxi/physics2d/VerletPhysics2D.java,
+	src.physics/toxi/physics2d/VerletSpring2D.java,
+	src.physics/toxi/physics2d/behaviors/AttractionBehavior.java,
+	src.physics/toxi/physics2d/behaviors/ConstantForceBehavior.java,
+	src.physics/toxi/physics2d/behaviors/GravityBehavior.java,
+	src.physics/toxi/physics2d/behaviors/ParticleBehavior2D.java,
+	src.physics/toxi/physics2d/constraints/AngularConstraint.java,
+	src.physics/toxi/physics2d/constraints/AxisConstraint.java,
+	src.physics/toxi/physics2d/constraints/CircularConstraint.java,
+	src.physics/toxi/physics2d/constraints/MaxConstraint.java,
+	src.physics/toxi/physics2d/constraints/MinConstraint.java,
+	src.physics/toxi/physics2d/constraints/ParticleConstraint2D.java,
+	src.physics/toxi/physics2d/constraints/RectConstraint.java,
+	src.sim/toxi/sim/automata/CAMatrix.java,
+	src.sim/toxi/sim/automata/CARule.java,
+	src.sim/toxi/sim/automata/CARule2D.java,
+	src.sim/toxi/sim/automata/CAWolfram1D.java,
+	src.sim/toxi/sim/automata/EvolvableMatrix.java,
+	src.sim/toxi/sim/automata/MatrixEvolver.java,
+	src.sim/toxi/sim/dla/BottomUpOrder.java,
+	src.sim/toxi/sim/dla/DLA.java,
+	src.sim/toxi/sim/dla/DLAConfiguration.java,
+	src.sim/toxi/sim/dla/DLAEventAdapter.java,
+	src.sim/toxi/sim/dla/DLAEventListener.java,
+	src.sim/toxi/sim/dla/DLAGuideLines.java,
+	src.sim/toxi/sim/dla/DLAParticle.java,
+	src.sim/toxi/sim/dla/DLASegment.java,
+	src.sim/toxi/sim/dla/PipelineOrder.java,
+	src.sim/toxi/sim/dla/RadialDistanceOrder.java,
+	src.sim/toxi/sim/erosion/ErosionFunction.java,
+	src.sim/toxi/sim/erosion/TalusAngleErosion.java,
+	src.sim/toxi/sim/erosion/ThermalErosion.java,
+	src.sim/toxi/sim/fluids/FluidSolver.java,
+	src.sim/toxi/sim/grayscott/GrayScott.java,
+	src.test/toxi/test/JAXBGeomTest.java,
+	src.test/toxi/test/geom/AABBIsecTest.java,
+	src.test/toxi/test/geom/PlaneTest.java,
+	src.test/toxi/test/geom/TriangleTest.java,
+	src.test/toxi/test/geom/WEMeshTest.java,
+	src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/BoxBrush.java,
+	src.volume/toxi/volume/HashIsoSurface.java,
+	src.volume/toxi/volume/IsoSurface.java,
+	src.volume/toxi/volume/MarchingCubesIndex.java,
+	src.volume/toxi/volume/MeshLatticeBuilder.java,
+	src.volume/toxi/volume/MeshVoxelizer.java,
+	src.volume/toxi/volume/RoundBrush.java,
+	src.volume/toxi/volume/VolumetricBrush.java,
+	src.volume/toxi/volume/VolumetricHashMap.java,
+	src.volume/toxi/volume/VolumetricSpace.java,
+	src.volume/toxi/volume/VolumetricSpaceArray.java:
+	adding/updating comments in all source files, renaming Triangle into
+	Triangle3D, adding CustomEvents example
+	[7b3562f4cdf0] <toxiclibs>
+
+2010-12-31  Karsten Schmidt  <k@postspectacular.com>
+
+	* examples/audio-external/HelloULaw/HelloULaw.pde, examples/audio-
+	external/HelloULaw/data/phone_ulaw.wav,
+	examples/audio/HelloULaw/HelloULaw.pde,
+	examples/audio/HelloULaw/data/phone_ulaw.wav,
+	examples/color/ImageColors/ImageColors.pde,
+	examples/color/MultiColorGradient/MultiColorGradient.pde,
+	examples/color/Ranges/Ranges.pde,
+	examples/core/geometry/Circle3Points/Circle3Points.pde,
+	examples/core/geometry/DashedDottedBox/DashedDottedBox.pde,
+	examples/core/geometry/Line2DIntersect/Line2DIntersect.pde,
+	examples/core/geometry/PolarUnravel/PolarUnravel.pde,
+	examples/core/geometry/Sierpinski/Sierpinski.pde, examples/core/geom
+	etry/TriangleCircumCircle/TriangleCircumCircle.pde,
+	examples/core/interpolation/BezierTween/BezierTween.pde,
+	examples/core/interpolation/LogScaleMap/LogScaleMap.pde,
+	examples/core/interpolation/ScaleMapDataViz/ScaleMapDataViz.pde,
+	examples/core/interpolation/ZoomLens/ZoomLens.pde,
+	examples/core/mapping/LogScaleMap/LogScaleMap.pde,
+	examples/core/mapping/ScaleMapDataViz/ScaleMapDataViz.pde,
+	examples/core/mapping/TwitterGeo/TwitterGeo.pde,
+	examples/core/mapping/TwitterGeo/code/readme.txt,
+	examples/core/mesh/BezierPatchSimple/BezierPatchSimple.pde,
+	examples/core/mesh/MeshDoodle/MeshDoodle.pde,
+	examples/core/mesh/MeshFaceExtrude/MeshFaceExtrude.pde,
+	examples/core/mesh/MobiusStripe/MobiusStripe.pde,
+	examples/core/mesh/OBJSTLStreamExport/OBJSTLStreamExport.pde,
+	examples/core/mesh/STLImportTest/STLImportTest.pde, examples/core/me
+	sh/SphericalHarmonicsMeshBuilder/SphericalHarmonicsMeshBuilder.pde, e
+	xamples/core/mesh/SuperEllipsoidMeshBuilder/SuperEllipsoidMeshBuilde
+	r.pde, examples/core/mesh/TerrainSteering/Car.pde,
+	examples/core/mesh/TerrainSteering/TerrainSteering.pde,
+	examples/core/splines/SplineFeatures/SplineFeatures.pde,
+	examples/data/FlickrAtom/FlickrAtom.pde,
+	examples/p5/GeometryInStyle/GeometryInStyle.pde,
+	examples/physics/Attraction2D/Attraction2D.pde,
+	examples/physics/BoxConstraintDemo/BoxConstraintDemo.pde,
+	examples/physics/DraggableParticles/DraggableParticles.pde,
+	examples/physics/InflateMesh/InflateMesh.pde,
+	examples/physics/JoinedCatenary/JoinedCatenary.pde,
+	examples/physics/JoinedCatenary/Mesh.pde,
+	examples/physics/JoinedCatenary/Voxel.pde,
+	examples/volume/AnimatedNoise/AnimatedNoise.pde,
+	examples/volume/ImplicitFunction/ImplicitFunction.pde,
+	examples/volume/ImplicitFunction/Volume.pde,
+	examples/volume/MRISurface/MRISurface.pde,
+	examples/volume/NoiseSurface/NoiseSurface.pde,
+	examples/volume/VoxelizeMesh/VoxelizeMesh.pde,
+	src.core/toxi/geom/Triangle2D.java,
+	src.core/toxi/geom/mesh/Terrain.java,
+	src.p5/toxi/processing/ToxiclibsSupport.java,
+	src.volume/toxi/volume/MeshVoxelizer.java:
+	updating & testing ALL existing demos/examples with syntax changes &
+	comments, adding new demos, minor updates ToxiclibsSupport and
+	MeshVoxelizer classes, added Triangle2D.fromBarycentric(), adding
+	more Terrain.toMesh() versions to be more compatible with other
+	primitives
+	[79344cb5ea8f] <toxiclibs>
+
+2010-11-22  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	adding MeshVoxelizer.voxelizeMesh(mesh) with default iso value=1
+	[65f539b9e758] <toxiclibs>
+
+2010-11-20  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java,
+	src.volume/toxi/volume/VolumetricHashMap.java,
+	src.volume/toxi/volume/VolumetricSpace.java,
+	src.volume/toxi/volume/VolumetricSpaceArray.java:
+	adding clear() to VolumetricSpace, refactoring MeshVoxelizer to
+	support wall thickness and turned from static into normal class
+	[f0268bb2fe46] <toxiclibs>
+
+2010-11-16  Karsten Schmidt  <k@postspectacular.com>
+
+	* .hgignore, ant/build_audio.xml, ant/build_color.xml,
+	ant/build_core.xml, ant/build_data.xml, ant/build_image.xml,
+	ant/build_p5.xml, ant/build_physics.xml, ant/build_sim.xml,
+	ant/build_volume.xml, ant/versions.properties, build_changelogs.sh,
+	examples/physics/Attraction2D/Attraction2D.pde,
+	examples/physics/InflateMesh/InflateMesh.pde,
+	examples/sim/ClassicWolfram/ClassicWolfram.pde,
+	examples/sim/ExtendedWolfram/ExtendedWolfram.pde,
+	examples/volume/AnimatedNoise/AnimatedNoise.pde,
+	examples/volume/BoxFluidDemo/BoxFluidDemo.pde,
+	examples/volume/BoxFluidDemo/Mesh.pde,
+	examples/volume/BoxFluidDemo/Physics.pde,
+	examples/volume/MRISurface/MRISurface.pde,
+	examples/volume/NoiseSurface/NoiseSurface.pde,
+	examples/volume/VolumeBrush/VolumeBrush.pde,
+	examples/volume/VolumetricCup/VolumetricCup.pde,
+	readme1st/audio/CHANGELOG.txt, readme1st/color/CHANGELOG.txt,
+	readme1st/core/CHANGELOG.txt, readme1st/data/CHANGELOG.txt,
+	readme1st/image/CHANGELOG.txt, readme1st/p5/CHANGELOG.txt,
+	readme1st/physics/CHANGELOG.txt, readme1st/sim/CHANGELOG.txt,
+	readme1st/volume/CHANGELOG.txt,
+	src.test/toxi/test/AttractTest2D.java,
+	src.volume/toxi/volume/HashIsoSurface.java:
+	testing, updating and adding P5 examples, removing changelogs from
+	mercurial, removing logging code from HashIsoSurface, updating all
+	ant build files and library version IDs
+	[c08efff06d70] <toxiclibs>
+
+2010-11-09  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.test/toxi/test/VolumetricTest.java,
+	src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/HashIsoSurface.java,
+	src.volume/toxi/volume/IsoSurface.java,
+	src.volume/toxi/volume/VolumetricHashMap.java,
+	src.volume/toxi/volume/VolumetricSpace.java:
+	refactoring getCellIndex() in IsoSurface implementations and
+	getVoxelAt() in VolumetricSpace class
+	[779a78b52ad7] <toxiclibs>
+
+2010-10-16  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.sim/toxi/sim/automata/CAMatrix.java,
+	src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/HashIsoSurface.java:
+	applying (slightly modified) patches submitted by Samuel Kleiner -
+	thanks!
+	[f867d5259e8b] <toxiclibs>
+
+2010-09-21  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.test/toxi/test/AxisRoundTest.java,
+	src.test/toxi/test/BezierTest.java,
+	src.test/toxi/test/CircumCircleTest.java,
+	src.test/toxi/test/ClassicWolfram.java,
+	src.test/toxi/test/ColorGradientVisuals.java,
+	src.test/toxi/test/ColorTestVisuals.java,
+	src.test/toxi/test/ColorThemeVisuals.java,
+	src.test/toxi/test/DLATest.java,
+	src.test/toxi/test/ExtrudeTest.java,
+	src.test/toxi/test/ImplicitVolume.java,
+	src.test/toxi/test/LatticeTest.java,
+	src.test/toxi/test/Line3DIsecTest.java,
+	src.test/toxi/test/MeshBuilderTest.java,
+	src.test/toxi/test/RunnableImplObject.java,
+	src.test/toxi/test/SplineTestApplet.java,
+	src.test/toxi/test/SubdivHoles.java,
+	src.test/toxi/test/SubdivTest.java,
+	src.test/toxi/test/TerrainTest.java,
+	src.test/toxi/test/TriIntersectionTest.java,
+	src.test/toxi/test/VolumetricTest.java,
+	src.test/toxi/test/VoronoiTest.java,
+	src.test/toxi/test/WEPhysics.java,
+	src.test/toxi/test/WolframTest.java,
+	src.test/toxi/test/geom/Line3DTest.java,
+	src.test/toxi/test/geom/WEMeshTest.java,
+	src.volume/toxi/volume/MeshLatticeBuilder.java, toxiclibs.xmind:
+	adding MeshLatticeBuilder to toxi.volume package, removing various
+	old test apps, removing outdated XMind project overview file (will
+	replace with graphviz auto-generated map soon)
+	[80f0ff412cb9] <wemesh>
+
+2010-09-10  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/VolumetricHashMap.java:
+	adding VolumetricHashMap as implementation of VolumetricSpace for
+	sparse voxel volumes, the expected density ratio can be specified in
+	the constructor to avoid rehashing operations
+	[8492d71b323c] <wemesh>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	updated voxelizeMesh() to just take a generic Mesh3D instance (was
+	WETriangleMesh, but not needed)
+	[2282dffdca45] <wemesh>
+
+	* src.volume/toxi/volume/VolumetricSpace.java:
+	adding closeSides() to the abstract VolumetricSpace class, throwing
+	an UnsupportedOperation exception by default (if not overwritten by
+	an implementation)
+	[18555d3981bd] <wemesh>
+
+2010-09-05  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	resolving scaling issues/clipping in MeshVoxelizer
+	[30864735e9be] <wemesh>
+
+	* src.volume/toxi/volume/BoxBrush.java,
+	src.volume/toxi/volume/RoundBrush.java,
+	src.volume/toxi/volume/VolumetricBrush.java,
+	src.volume/toxi/volume/VolumetricSpace.java,
+	src.volume/toxi/volume/VolumetricSpaceArray.java:
+	adding VolumetricHashMap class for sparse volumes. Also refactoring
+	VolumetricBrush implementations to work not just with existing
+	VolumetricSpaceArray by adding a setVoxelAt() method to
+	VolumetricSpace base class. This method throws
+	UnsupportedOperationException by default, but can & is being
+	overwritten/implemented by both array and hashmap based
+	implementations...
+	[592ce9bed617] <wemesh>
+
+2010-09-01  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/HashIsoSurface.java:
+	updating IsoSurface implementations to use getVoxelAt(x,y,z)
+	versions
+	[dd155dcf71c1] <wemesh>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	adding ultrabasic version of solidifyVolume() to MeshVoxelizer
+	class. This doesn't currently work with any kind of convexness in
+	the volume space and further voxel-mesh collision tests are needed
+	to figure out if a voxel is within the model or not (check normal of
+	triangle intersecting a voxel)
+	[a95d66f5776d] <wemesh>
+
+	* src.volume/toxi/volume/VolumetricSpace.java,
+	src.volume/toxi/volume/VolumetricSpaceArray.java:
+	removed getVoxelAt(int) and only using getVoxelAt(x,y,z) now, added
+	setVoxelAt() to VolumetricSpaceArray
+	[6be8837fc68f] <wemesh>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	refactored/optimized MeshVoxelizer to iterate over mesh faces only
+	once in the outer loop and only check voxels within the bounding box
+	of each triangle
+	[6347a0b7a05c] <wemesh>
+
+2010-08-31  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/MeshVoxelizer.java:
+	adding initial version of MeshVoxelizer
+	[d50b3729e928] <wemesh>
+
+2010-08-27  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/HashIsoSurface.java:
+	adding log level check
+	[84d7aa817c99] <wemesh>
+
+2010-08-16  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/BoxBrush.java,
+	src.volume/toxi/volume/HashIsoSurface.java,
+	src.volume/toxi/volume/RoundBrush.java,
+	src.volume/toxi/volume/VolumetricBrush.java,
+	src.volume/toxi/volume/VolumetricSpace.java,
+	src.volume/toxi/volume/VolumetricSpaceArray.java:
+	refactored VolumetricSpace into abstract class with existing
+	implementation renamed into VolumetricSpaceArray. The new structure
+	allows for non-array based volume descriptions (e.g. implicit
+	functions), but currently implementations need to ensure the volume
+	is closed on all sides (some issue with recent IsoSurface changes)
+	[3f22154c05fa] <wemesh>
+
+2010-08-15  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/ArrayIsoSurface.java:
+	added upper bounds check for edgeFlags
+	[044d4885de3f] <wemesh>
+
+	* src.volume/toxi/volume/HashIsoSurface.java:
+	added upper bounds check for edgeFlags
+	[410286c5874d] <wemesh>
+
+2010-08-14  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/ArrayIsoSurface.java,
+	src.volume/toxi/volume/HashIsoSurface.java,
+	src.volume/toxi/volume/IsoSurface.java:
+	refactored IsoSurface into interface with new ArrayIsoSurface &
+	HashIsoSurface implementations, added javadocs
+	[25610b1c7b59] <wemesh>
+
+2010-08-13  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/IsoSurface.java:
+	further refactoring & memory optimizations, now using a growing
+	HashMap to store vertices instead of a huge, pre-allocated array
+	[08487f695fa3] <wemesh>
+
+	* src.volume/toxi/volume/IsoSurface.java:
+	refactored IsoSurface to be much more RAM efficient & faster,
+	removed plain computeSurface() (triangle soup) method (only
+	computeSurfaceMesh() is available)
+	[921fcfc42539] <wemesh>
+
+2010-05-20  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.color/toxi/color/TColor.java, src.core/toxi/geom/AABB.java,
+	src.core/toxi/geom/AxisAlignedCylinder.java,
+	src.core/toxi/geom/Cone.java, src.core/toxi/geom/IsectData.java,
+	src.core/toxi/geom/Line3D.java, src.core/toxi/geom/Matrix4x4.java,
+	src.core/toxi/geom/Plane.java, src.core/toxi/geom/PointCloud.java,
+	src.core/toxi/geom/PointOctree.java,
+	src.core/toxi/geom/Polygon2D.java, src.core/toxi/geom/Quad.java,
+	src.core/toxi/geom/Quaternion.java, src.core/toxi/geom/Ray3D.java,
+	src.core/toxi/geom/Reflector.java, src.core/toxi/geom/Sphere.java,
+	src.core/toxi/geom/SphereIntersectorReflector.java,
+	src.core/toxi/geom/Spline3D.java, src.core/toxi/geom/Triangle.java,
+	src.core/toxi/geom/Vec3D.java,
+	src.core/toxi/geom/XAxisCylinder.java,
+	src.core/toxi/geom/YAxisCylinder.java,
+	src.core/toxi/geom/ZAxisCylinder.java,
+	src.core/toxi/geom/mesh/TriangleMesh.java,
+	src.test/toxi/test/DLATest.java,
+	src.test/toxi/test/TerrainTest.java,
+	src.test/toxi/test/audio/JOALTest.java,
+	src.test/toxi/test/audio/MemTest.java,
+	src.test/toxi/test/geom/GeomTestSuite.java,
+	src.test/toxi/test/geom/MatrixTest.java,
+	src.test/toxi/test/geom/QuaternionTest.java,
+	src.test/toxi/test/geom/TriangleTest.java,
+	src.volume/toxi/volume/IsoSurface.java:
+	extracted ReadonlyVec3D interface and updated all resulting changes
+	through all packages
+	[f2fd58158ce5] <vec3drefactor>
+
+2010-03-14  Karsten Schmidt  <k@postspectacular.com>
+
+	* examples/core/MeshAlignToAxis/MeshAlignToAxis.pde,
+	examples/core/MeshDoodle/MeshDoodle.pde,
+	examples/core/STLImportTest/STLImportTest.pde, examples/core/SuperEl
+	lipsoidMeshBuilder/SuperEllipsoidMeshBuilder.pde,
+	examples/physics/BoxFluidDemo/BoxFluidDemo.pde,
+	examples/volume/BoxFluidDemo/BoxFluidDemo.pde,
+	examples/volume/MRISurface/MRISurface.pde,
+	examples/volume/NoiseSurface/NoiseSurface.pde,
+	src.core/toxi/geom/AABB.java,
+	src.core/toxi/geom/AxisAlignedCylinder.java,
+	src.core/toxi/geom/Cone.java, src.core/toxi/geom/Plane.java,
+	src.core/toxi/geom/XAxisCylinder.java,
+	src.core/toxi/geom/YAxisCylinder.java,
+	src.core/toxi/geom/ZAxisCylinder.java,
+	src.core/toxi/geom/mesh/DefaultSTLColorModel.java,
+	src.core/toxi/geom/mesh/MaterialiseSTLColorModel.java,
+	src.core/toxi/geom/mesh/OBJWriter.java,
+	src.core/toxi/geom/mesh/STLColorModel.java,
+	src.core/toxi/geom/mesh/STLReader.java,
+	src.core/toxi/geom/mesh/STLWriter.java,
+	src.core/toxi/geom/mesh/SphericalHarmonics.java,
+	src.core/toxi/geom/mesh/SuperEllipsoid.java,
+	src.core/toxi/geom/mesh/SurfaceFunction.java,
+	src.core/toxi/geom/mesh/SurfaceMeshBuilder.java,
+	src.core/toxi/geom/mesh/TriangleMesh.java,
+	src.core/toxi/geom/util/DefaultSTLColorModel.java,
+	src.core/toxi/geom/util/MaterialiseSTLColorModel.java,
+	src.core/toxi/geom/util/OBJWriter.java,
+	src.core/toxi/geom/util/STLColorModel.java,
+	src.core/toxi/geom/util/STLReader.java,
+	src.core/toxi/geom/util/STLWriter.java,
+	src.core/toxi/geom/util/SphericalHarmonics.java,
+	src.core/toxi/geom/util/SuperEllipsoid.java,
+	src.core/toxi/geom/util/SurfaceFunction.java,
+	src.core/toxi/geom/util/SurfaceMeshBuilder.java,
+	src.core/toxi/geom/util/TriangleMesh.java,
+	src.core/toxi/math/MathUtils.java,
+	src.test/toxi/test/geom/TriangleMeshTest.java,
+	src.volume/toxi/volume/IsoSurface.java:
+	renamed package toxi.geom.util into toxi.geom.mesh, added
+	getDefaultRGB() to STLColorModel, refactored
+	TriangleMesh.saveAsSTL() and fixed vertex order in saveAsOBJ(),
+	added DEFAULT_RGB constant to STLWriter, added enableFacetColor flag
+	to MaterialiseSTLColorModel, updated new package references in
+	related classes & examples @twitter
+	[c16a57bd455f] <toxiclibs>
+
+2010-03-01  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/IsoSurface.java:
+	fixing vertex order when adding faces to mesh in
+	computeSurfaceMesh() (fixes normals now correctly outward facing)
+	[313e6fe5baf5] <toxiclibs>
+
+2010-02-16  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/IsoSurface.java:
+	fixing issue #11 and refactoring computeSurfaceMesh()
+	[1fe22b7693c4] <toxiclibs>
+
+2009-11-23  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/IsoSurface.java:
+	changing vertex ordering in computeSurfaceMesh() in order to fix
+	normals
+	[46627d4e7e72] <toxiclibs>
+
+2009-10-15  Karsten Schmidt  <k@postspectacular.com>
+
+	* examples/volume/BoxFluidDemo/BoxFluidDemo.pde,
+	examples/volume/BoxFluidDemo/GUI.pde,
+	examples/volume/BoxFluidDemo/Mesh.pde,
+	examples/volume/BoxFluidDemo/Physics.pde,
+	readme1st/volume/CHANGELOG.txt,
+	src.volume/toxi/volume/BoxBrush.java,
+	src.volume/toxi/volume/IsoSurface.java,
+	src.volume/toxi/volume/RoundBrush.java,
+	src.volume/toxi/volume/VolumetricSpace.java:
+	updating volumeutils classes with changes done during nokia project
+	(see changelog), adding BoxFluidDemo example for Processing and
+	updated changelog
+	[adedc009d67f] <toxiclibs>
+
+2009-07-22  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/IsoSurface.java,
+	src.volume/toxi/volume/MarchingCubesIndex.java:
+	optimizations to inner loops in computeSurface() and getCellIndex()
+	[409aaafd9fb2] <toxiclibs>
+
+2009-06-29  Karsten Schmidt  <k@postspectacular.com>
+
+	* ant/build_volume.xml, src.volume/toxi/volume/IsoSurface.java:
+	updating version number in volume build.xml and adding alternative
+	IsoSurface.computeSurfaceMesh() method utilizing new TriangleMesh
+	class
+	[6f41c7f3acc7] <toxiclibs>
+
+2009-02-27  Karsten Schmidt  <k@postspectacular.com>
+
+	* src.volume/toxi/volume/BoxBrush.java,
+	src.volume/toxi/volume/IsoSurface.java,
+	src.volume/toxi/volume/MarchingCubesIndex.java,
+	src.volume/toxi/volume/RoundBrush.java,
+	src.volume/toxi/volume/VolumetricBrush.java,
+	src.volume/toxi/volume/VolumetricSpace.java:
+	moving volume classes out from core libs and into separate package
+	toxi.volume which will also become its own subrelease
+	[9b2a86a532cf] <toxiclibs>
+
