@@ -247,8 +247,8 @@ void requestEvent()
     else { 
         digitalWrite(LED_RED, HIGH);
         lightAnalogRead = analogRead(ADC_LIGHT_PIN); // Read light value 
-        thermistorAnalogRead = readInternalTemperature(); //Read thermistor valie
-        positionAnalogRead = analogRead(A1); //Read position
+        thermistorAnalogRead = lightAnalogRead; //Read thermistor valie
+        //positionAnalogRead = analogRead(A1); //Read position
         
         byte a = deviceID & 0xFF;
         byte b = (deviceID >>8 ) & 0xFF;
@@ -266,8 +266,20 @@ void requestEvent()
                       fifoBuffer[1], fifoBuffer[0], 
                       fifoBuffer[5], fifoBuffer[4], 
                       fifoBuffer[9], fifoBuffer[8],
-                      fifoBuffer[13], fifoBuffer[12]};              
-        Wire.write(All, 16); 
+                      fifoBuffer[13], fifoBuffer[12]};     
+        
+        byte *mypointer; 
+        mypointer = All;
+        byte crc8 = CRC8(mypointer, 16);
+        
+        byte data [] = {a,b,c,d,e,f,g,h, 
+              fifoBuffer[1], fifoBuffer[0], 
+              fifoBuffer[5], fifoBuffer[4], 
+              fifoBuffer[9], fifoBuffer[8],
+              fifoBuffer[13], fifoBuffer[12],
+              crc8, 0x00}; 
+                        
+        Wire.write(data, 18); 
         digitalWrite(LED_RED, LOW);    
     }//end else        
 }//end requestEvent
@@ -295,5 +307,24 @@ int readInternalTemperature() {
     result |= ADCH<<8;
     //result = (result - 125) * 1075;
     return result;
+}
+
+//CRC-8 - based on the CRC8 formulas by Dallas/Maxim
+//From here: 
+///http://www.leonardomiliani.com/en/2013/un-semplice-crc8-per-arduino/
+byte CRC8(const byte *data, byte len) {
+  byte crc = 0x00;
+  while (len--) {
+    byte extract = *data++;
+    for (byte tempI = 8; tempI; tempI--) {
+      byte sum = (crc ^ extract) & 0x01;
+      crc >>= 1;
+      if (sum) {
+        crc ^= 0x8C;
+      }
+      extract >>= 1;
+    }
+  }
+  return crc;
 }
 

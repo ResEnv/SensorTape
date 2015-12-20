@@ -41,10 +41,10 @@ void setup()
     for (int i=0; i<Serial.list().length; i++) { 
       System.out.println(i + " : " + Serial.list()[i]); 
     }//end for
-    myPort = new Serial(this, Serial.list()[0], 115200);
+    myPort = new Serial(this, Serial.list()[13], 115200);
     
     //Use this code to declare the nodes at the start. Avoid needing a restart every time rerunning the program, a lot faster for development
-    int numberOfNodes = 12;
+    int numberOfNodes = 16;
     int [] cuts = {0,0,0,0};  
     for (int i=1; i<numberOfNodes+1; i++) { 
       sensorNode tempSensorNode = new sensorNode(i, 3, 1, cuts );   
@@ -59,6 +59,7 @@ void draw() {
       directionalLight(51, 50, 255, 0, -1, 0);
       directionalLight(255, 50, 0, 0,1, 0);
       ambientLight(102, 102, 102);
+      scale(0.7);
      
      //Initialize the drawing function (vectors, etc) 
      if (!start && !drawInitialized) { 
@@ -113,7 +114,7 @@ void draw() {
          inString = trim(inString);
          String[] list = split(inString, ',');
                  
-         if (list.length==9) { 
+         if (list.length==10 && inString.charAt(inString.length()-1) == '2') { 
            sensorNode tempSensorNode = listSensors.get(Integer.parseInt(list[1])-1);
            int tempInput[]; 
            tempInput = new int [list.length-1];

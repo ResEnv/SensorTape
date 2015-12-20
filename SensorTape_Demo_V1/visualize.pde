@@ -86,21 +86,39 @@ public class visualize {
     
       //---------Visualize light sensor---------
       if (type ==1 && data.length>7) {
+        stroke(1);
+        strokeWeight(1);
         fill(data[1],0,0); 
         rect(xpos,ypos, 60,60); 
         textSize(15);
         text("Light Sensor", 100, 200);
+        //noStroke();
       }   
       //---------Visualize proximity---------
       if (type ==2 && data.length>7) { 
-        fill(0,0,data[3]); 
-        text(data[3] +" mm", xpos, ypos);
-        rect(xpos,ypos, 60,60); 
-        text("Proximity Sensor", 100, 200);
+         noStroke();
+         if (data[3]>200) { 
+            textSize(50);
+            fill(128);
+            rect(width-data[0]*135-200, height-600, 125, 400);
+            text("???", width-data[0]*135-200, height-650);
+            text("mm",width-data[0]*135-200, height-605);
+         }
+         else { 
+           textSize(50);
+           fill(0,0,255);
+           rect(width-data[0]*135-200, height-600, 125, data[3]*2);
+           text(data[3],width-data[0]*135-200, height-650);
+           text("mm",width-data[0]*135-200, height-605);
+          }
       }
       
       //---------Visualize IMU data, in quaternion format---------
       if (type==3 && data.length>7) { 
+         textSize(15);
+         stroke(1);
+         strokeWeight(1);
+         
         text(data[4], xpos, ypos);
         text(data[5], xpos, ypos-20);
         text(data[6], xpos, ypos-40);
@@ -111,6 +129,8 @@ public class visualize {
       }
       //---------Visualize temperature---------
       if (type==4 && data.length>7) { 
+        stroke(1);
+        strokeWeight(1);
         //does not convert it right, needs better calibration
         text(convertToTemperature(data[2]) + " C",xpos, ypos);
         fill(128);
@@ -205,6 +225,7 @@ public class visualize {
           ctrl_pts[position][1] = new PVector( newPosX*4 , newPosY*4, 1* -v_spacing * 1/5);
           ctrl_pts[position][0] = new PVector( newPosX*4 , newPosY*4-4*twistY, 0* -v_spacing + twistZ*4);
           
+          
           //Visualize the control points (not required)         
           for (int i = 0; i < u_ctrl_pts; i++) {
               for (int j = 0; j < v_ctrl_pts; j++) {
@@ -214,6 +235,8 @@ public class visualize {
                 applet.strokeWeight(1);    
               }//end for
            }//end for
+           
+         
         }else  
         { 
          // Do nothing
